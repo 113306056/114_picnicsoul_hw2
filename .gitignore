@@ -1,0 +1,9 @@
+front/node_modules/
+front/.next/
+front/.turbo/
+front/.vercel/
+front/.env
+front/.env.local
+front/.env.*.local
+
+**/.DS_Store
