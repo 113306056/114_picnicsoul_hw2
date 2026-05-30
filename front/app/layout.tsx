@@ -13,9 +13,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-Hant">
-      <body>
-        <main className="min-h-screen flex justify-center bg-[#6AA6DD] px-0 py-0 sm:px-4 sm:py-6">
-          <div className="w-full max-w-[480px] min-h-screen overflow-hidden bg-[#6AA6DD] sm:min-h-[calc(100vh-48px)] sm:rounded-[32px] sm:shadow-xl">
+      <body className="min-h-screen">
+        {/* 外層整頁背景：summerbc 圖片 */}
+        <div className="fixed inset-0 -z-10">
+          <img
+            src="/images/summerbc.png"
+            alt="summer background"
+            className="h-full w-full object-cover"
+          />
+          {/* 可有可無：加一層淡白色，讓背景更柔和 */}
+          <div className="absolute inset-0 bg-white/10" />
+        </div>
+
+        {/* 中間 9:16 測驗框 */}
+        <main className="relative z-10 min-h-screen flex justify-center items-center px-0 py-0 sm:px-4 sm:py-6">
+          <div className="w-full max-w-[480px] min-h-screen overflow-hidden bg-[#6AA6DD] sm:min-h-[calc(100vh-48px)] sm:rounded-[32px] sm:shadow-2xl">
             {children}
           </div>
         </main>
