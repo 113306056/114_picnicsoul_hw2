@@ -1,51 +1,33 @@
-"use client"
+"use client";
+
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { Button } from '@heroui/react';
-import { ColorSlider, Label } from '@heroui/react';
-import {parseColor} from "react-aria-components";
-import ActionButton from "@/component/ActionButton";
-import Emoticons from "@/component/Emoticons"
+import { usePsyStore } from "@/store/store";
 
 export default function Home() {
+  const resetAnswers = usePsyStore((state) => state.resetAnswers);
 
-  const [color, setColor] = useState(parseColor("hsl(0, 100%, 50%)"));
-
-  //階段名稱      路由規劃
-  //1. 歡迎畫面   /
-  //2. 答題      /question
-  //3. 準備看結果 /prepare
-  //4. 看結果    /result
-  // https://psy-test.com/love/result?id=10
+  function startTest() {
+    resetAnswers();
+  }
 
   return (
-    <>
-      <div className="flex flex-col items-center gap-4">
-        歡迎！
-        {/* <Emoticons/> */}
-        <Emoticons faceIndex={0}>
-          <Link className="text-white bg-black px-3 py-2" href="/question">START</Link>
-        </Emoticons>
+    <section className="relative min-h-[calc(100vh-48px)] overflow-hidden bg-[#7fb6e6] text-white">
+      <img
+        src="/cover.png"
+        alt="Summer Picnic Soul 封面"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
 
+      <div className="absolute inset-0 bg-black/0" />
 
-        <ColorSlider
-          value={color}
-          onChange={setColor}
-          channel="hue" className="w-full max-w-xs" defaultValue="hsl(0, 100%, 50%)">
-          <Label>Hue</Label>
-          <ColorSlider.Output />
-          <ColorSlider.Track>
-            <ColorSlider.Thumb />
-          </ColorSlider.Track>
-        </ColorSlider>
-
-        {color.toString()}
-
-        <Link className="text-white bg-black px-3 py-2" href="/question">START</Link>
-        
-        <ActionButton/>
-
-      </div>
-    </>
+      <Link
+        href="/question"
+        onClick={startTest}
+        aria-label="開始測驗"
+        className="absolute bottom-[8%] left-1/2 h-[72px] w-[74%] -translate-x-1/2 rounded-full"
+      >
+        <span className="sr-only">開始測驗</span>
+      </Link>
+    </section>
   );
 }

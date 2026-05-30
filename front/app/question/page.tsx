@@ -1,69 +1,71 @@
-"use client"
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"
-import { usePsyStore } from "../../store/store"
+"use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { quizData, usePsyStore } from "@/store/store";
+import type { PersonalityKey } from "@/store/store";
 
-export default function Question() {
+export default function QuestionPage() {
   const router = useRouter();
   const [questionIndex, setQuestionIndex] = useState(0);
-  
-  const psyData = usePsyStore( (state) => state.psyData );
-  const setPsyScore = usePsyStore( (state) => state.setScore );
-  
-  console.log(psyData);
-  console.log(psyData.quizData);
 
+  const setAnswer = usePsyStore((state) => state.setAnswer);
 
+  const currentQuestion = quizData[questionIndex];
+  const progress = ((questionIndex + 1) / quizData.length) * 100;
 
-  useEffect( () => {
-    console.log("目前分數：" + psyData.score);
-  }, [psyData.score] );
+  function chooseOption(type: PersonalityKey) {
+    setAnswer(questionIndex, type);
 
-  
-
-  function nextQuestion(optionIndex: any){
-    console.log("使用者選擇：" + optionIndex);
-
-    setPsyScore( psyData.score + psyData.quizData[questionIndex].options[optionIndex].value );
-    console.log( psyData.score );
-    
-    
-    if( questionIndex != psyData.quizData.length-1 ){  
-      console.log("下一題～");
-      setQuestionIndex( questionIndex + 1 );
-    }else{
-      console.log("進入準備看結果頁面");
+    if (questionIndex < quizData.length - 1) {
+      setQuestionIndex(questionIndex + 1);
+    } else {
       router.push("/prepare");
     }
-    
   }
 
   return (
-    <>
-      <div className="flex flex-col items-center gap-4">
-        答題
-
-        <div>
-          <div>{ "Q"+ (questionIndex+1) + "." + psyData.quizData[questionIndex].title }</div>
-          {/* <div onClick={ ()=>nextQuestion(0) }>{ psyData.quizData[questionIndex].options[0].text }</div>
-          <div onClick={ ()=>nextQuestion(1) }>{ psyData.quizData[questionIndex].options[1].text }</div>
-          <div onClick={ ()=>nextQuestion(2) }>{ psyData.quizData[questionIndex].options[2].text }</div> */}
-          
-          {
-            psyData.quizData[questionIndex].options.map(
-              (option: any, index: number)=>{
-                return <div onClick={ ()=>nextQuestion(index) }>{ option.text }</div>
-              }
-            )
-          }
-          
+    <section className="min-h-full px-6 py-8 text-white">
+      <div className="mb-8">
+        <div className="mb-3 flex items-center justify-between text-sm opacity-90">
+          <span>
+            Question {questionIndex + 1} / {quizData.length}
+          </span>
+          <span>{Math.round(progress)}%</span>
         </div>
 
-        {/* <Link className="text-white bg-black px-3 py-2" href="/prepare">準備看結果</Link> */}
+        <div className="h-3 overflow-hidden rounded-full border border-white/80">
+          <div
+            className="h-full rounded-full bg-white transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
       </div>
-    </>
-  );
 
+      <div className="picnic-card rounded-[28px] p-6">
+        <p className="mb-3 text-sm tracking-[0.2em] opacity-80">
+          夏日野餐邀請函
+        </p>
+
+        <h1 className="text-2xl font-bold leading-9">
+          {currentQuestion.title}
+        </h1>
+      </div>
+
+      <div className="mt-6 space-y-3">
+        {currentQuestion.options.map((option) => (
+          <button
+            key={option.label}
+            onClick={() => chooseOption(option.type)}
+            className="w-full rounded-2xl border-2 border-white/85 bg-white/10 px-5 py-4 text-left text-white transition hover:bg-white hover:text-[#4E91C9] active:scale-[0.98]"
+          >
+            <span className="mr-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-[#4E91C9]">
+              {option.label}
+            </span>
+            <span className="text-base leading-7">{option.text}</span>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
 }
