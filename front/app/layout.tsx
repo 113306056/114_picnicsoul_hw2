@@ -17,7 +17,7 @@ export default function RootLayout({
         {/* 外層整頁背景：summerbc 圖片 */}
         <div className="fixed inset-0 -z-10">
           <img
-            src="/images/summerbc.png"
+            src="/summerbc.png"
             alt="summer background"
             className="h-full w-full object-cover"
           />
@@ -27,7 +27,7 @@ export default function RootLayout({
 
         {/* 中間 9:16 測驗框 */}
         <main className="relative z-10 min-h-screen flex justify-center items-center px-0 py-0 sm:px-4 sm:py-6">
-          <div className="w-full max-w-[480px] min-h-screen overflow-hidden bg-[#6AA6DD] sm:min-h-[calc(100vh-48px)] sm:rounded-[32px] sm:shadow-2xl">
+          <div className="w-full max-w-[480px] min-h-screen overflow-hidden bg-transparent sm:min-h-[calc(100vh-48px)] sm:rounded-[32px] sm:border-2 sm:border-white/80 sm:shadow-2xl">
             {children}
           </div>
         </main>
