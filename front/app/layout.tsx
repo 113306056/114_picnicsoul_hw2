@@ -17,7 +17,7 @@ export default function RootLayout({
         {/* 外層天空背景 */}
         <div className="fixed inset-0 -z-10">
           <img
-            src="/images/summerbc.png"
+            src="/summerbc.png"
             alt="summer background"
             className="h-full w-full object-cover"
           />
