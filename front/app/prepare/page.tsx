@@ -7,7 +7,7 @@ export default function PreparePage() {
   const answers = usePsyStore((state) => state.answers);
 
   return (
-    <section className="min-h-full flex flex-col items-center justify-center px-6 py-10 text-center text-white">
+    <section className="flex h-full flex-col items-center justify-center px-6 py-10 text-center text-white">
       <div className="white-doodle-border rounded-[32px] p-8">
         <p className="text-sm tracking-[0.25em] opacity-80">RESULT IS READY</p>
 

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { quizData, usePsyStore, PersonalityKey } from "@/store/store";
+import { quizData, usePsyStore } from "@/store/store";
+import type { PersonalityKey } from "@/store/store";
 
 export default function QuestionPage() {
   const router = useRouter();

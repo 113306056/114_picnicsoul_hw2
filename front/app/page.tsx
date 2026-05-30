@@ -11,14 +11,12 @@ export default function Home() {
   }
 
   return (
-    <section className="relative min-h-[calc(100vh-48px)] overflow-hidden bg-[#7fb6e6] text-white">
+    <section className="relative h-full min-h-0 overflow-hidden">
       <img
         src="/cover.png"
         alt="Summer Picnic Soul 封面"
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-top"
       />
-
-      <div className="absolute inset-0 bg-black/0" />
 
       <Link
         href="/question"
