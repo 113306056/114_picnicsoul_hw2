@@ -36,37 +36,37 @@ export default function QuestionPage() {
   }
 
   return (
-    <section className="min-h-full flex flex-col px-5 py-6 text-white sm:px-7 sm:py-8">
+    <section className="flex h-full flex-col px-5 py-5 text-white sm:px-6 sm:py-6">
       {/* 進度區 */}
-      <div className="rounded-3xl bg-[#2f6f9f]/70 p-4 shadow-lg ring-1 ring-white/40 backdrop-blur-md">
-        <div className="mb-3 flex items-center justify-between text-sm font-semibold text-white">
+      <div className="rounded-2xl bg-[#2F6F9F]/32 p-3 shadow-sm ring-1 ring-white/35 backdrop-blur-md">
+        <div className="mb-2 flex items-center justify-between text-xs font-semibold text-white/95">
           <span>
             Question {questionIndex + 1} / {quizData.length}
           </span>
           <span>{Math.round(progress)}%</span>
         </div>
 
-        <div className="h-3 overflow-hidden rounded-full bg-white/25 ring-1 ring-white/40">
+        <div className="h-2 overflow-hidden rounded-full bg-white/28 ring-1 ring-white/30">
           <div
-            className="h-full rounded-full bg-[#F5E38A] transition-all duration-300"
+            className="h-full rounded-full bg-white/90 transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
       {/* 題目卡 */}
-      <div className="mt-5 rounded-[28px] bg-[#285f8b]/85 p-6 shadow-xl ring-2 ring-white/70 backdrop-blur-md">
-        <p className="mb-3 text-xs font-bold tracking-[0.25em] text-[#F5E38A]">
+      <div className="mt-4 rounded-[24px] bg-[#285F8B]/40 p-5 shadow-sm ring-1 ring-white/45 backdrop-blur-md">
+        <p className="mb-2 text-[11px] font-bold tracking-[0.22em] text-[#F5E38A]">
           夏日野餐邀請函
         </p>
 
-        <h1 className="text-xl font-bold leading-8 text-white sm:text-2xl sm:leading-9">
+        <h1 className="text-[21px] font-bold leading-8 text-white drop-shadow-sm">
           {currentQuestion.title}
         </h1>
       </div>
 
-      {/* 選項 */}
-      <div className="mt-5 flex-1 space-y-3">
+      {/* 選項區 */}
+      <div className="mt-4 flex-1 space-y-2.5">
         {currentQuestion.options.map((option) => {
           const isSelected = currentSelected === option.type;
 
@@ -75,29 +75,28 @@ export default function QuestionPage() {
               key={option.label}
               onClick={() => chooseOption(option.type)}
               className={`
-                w-full rounded-2xl border-2 px-4 py-3.5 text-left shadow-md transition active:scale-[0.98]
-                sm:px-5 sm:py-4
+                flex w-full items-center rounded-2xl border px-4 py-2.5 text-left shadow-sm transition active:scale-[0.985]
                 ${
                   isSelected
-                    ? "border-[#F5E38A] bg-[#F5E38A] text-[#F15E62]"
-                    : "border-white/50 bg-[#1f527a]/78 text-white hover:border-white hover:bg-[#174463]"
+                    ? "border-[#F5E38A]/90 bg-[#F5E38A]/92 text-[#EF5B62]"
+                    : "border-white/38 bg-[#2F6F9F]/30 text-white hover:border-white/80 hover:bg-white/22"
                 }
               `}
             >
               <span
                 className={`
-                  mr-3 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold
+                  mr-3 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold
                   ${
                     isSelected
-                      ? "bg-[#F15E62] text-[#F5E38A]"
-                      : "bg-white text-[#2f6f9f]"
+                      ? "bg-[#EF5B62] text-[#F5E38A]"
+                      : "bg-white/92 text-[#3F82B7]"
                   }
                 `}
               >
                 {option.label}
               </span>
 
-              <span className="text-sm font-semibold leading-7 sm:text-base">
+              <span className="text-[14px] font-semibold leading-6 sm:text-[15px]">
                 {option.text}
               </span>
             </button>
@@ -106,16 +105,16 @@ export default function QuestionPage() {
       </div>
 
       {/* 上一題 / 下一題 */}
-      <div className="mt-6 grid grid-cols-2 gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-3">
         <button
           onClick={goPrev}
           disabled={questionIndex === 0}
           className={`
-            rounded-full px-5 py-3.5 font-bold shadow-md transition active:scale-95
+            rounded-full px-5 py-3 text-sm font-bold shadow-sm transition active:scale-95
             ${
               questionIndex === 0
-                ? "cursor-not-allowed border-2 border-white/25 bg-white/10 text-white/35"
-                : "border-2 border-white bg-[#285f8b]/80 text-white hover:bg-white hover:text-[#285f8b]"
+                ? "cursor-not-allowed border border-white/25 bg-white/8 text-white/35"
+                : "border border-white/70 bg-white/10 text-white hover:bg-white/85 hover:text-[#3F82B7]"
             }
           `}
         >
@@ -126,11 +125,11 @@ export default function QuestionPage() {
           onClick={goNext}
           disabled={!currentSelected}
           className={`
-            rounded-full px-5 py-3.5 font-bold shadow-md transition active:scale-95
+            rounded-full px-5 py-3 text-sm font-bold shadow-md transition active:scale-95
             ${
               !currentSelected
-                ? "cursor-not-allowed bg-[#F5E38A]/40 text-[#F15E62]/50"
-                : "bg-[#F5E38A] text-[#F15E62] hover:brightness-105"
+                ? "cursor-not-allowed bg-[#F5E38A]/35 text-[#EF5B62]/45"
+                : "bg-[#F5E38A]/95 text-[#EF5B62] hover:brightness-105"
             }
           `}
         >
@@ -138,7 +137,7 @@ export default function QuestionPage() {
         </button>
       </div>
 
-      <p className="mt-4 text-center text-xs font-medium text-white/80">
+      <p className="mt-2 text-center text-[11px] font-medium text-white/68">
         請先選擇一個答案，再按下一題
       </p>
     </section>
